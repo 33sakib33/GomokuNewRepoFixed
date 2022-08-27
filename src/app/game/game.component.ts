@@ -49,17 +49,29 @@ export class GameComponent implements OnInit {
 	}
 
 	private checkWinner() : number{
-		if(this.ai.getScore(this.board, true, false) >= this.ai.getWinScore()) return 2;
-		if(this.ai.getScore(this.board, false, true) >= this.ai.getWinScore()) return 1;
+		if(this.ai.getScore(this.board, true, false) >= this.ai.getWinScore()) {
+			this.gameFinished=true;
+			return 2;
+		}
+		if(this.ai.getScore(this.board, false, true) >= this.ai.getWinScore()){
+			this.gameFinished=true;
+			return 1;
+		}
 		return 0;
 	}
 	// private playMove(posX : number, posY : number, black : boolean) : boolean{
 	// 	return this.board.addStone(posX, posY, black);
 	// }
 	playerMakesMove(x: number, y: number):void{
-		this.board.addStone(x,y,true);
-		this.aiMakesMove();
-		this.checkGameStatus();
+		if(this.board.addStone(x,y,true)){
+			this.winner=this.checkWinner();
+			this.aiMakesMove();
+			this.winner=this.checkWinner();
+			this.checkGameStatus();
+		}
+		
+		
+		
 		
 	}
 	aiMakesMove():void{
@@ -70,10 +82,10 @@ export class GameComponent implements OnInit {
 	}
 	checkGameStatus():void{
 		if(this.gameFinished==true){
+			this.dialog.open(GameOverDialogComponent);
 			this.board=new Board(10);
 			this.gameFinished=false;
 			this.ai=new Minimax(this.board);
-			this.dialog.open(GameOverDialogComponent);
 			
 		}
 	}
