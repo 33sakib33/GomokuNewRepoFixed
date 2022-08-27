@@ -1,0 +1,13 @@
+.center{
+
+    align-items: center;
+    margin-top: 5rem;
+    margin-left: 20rem;
+    
+}
+.center p{
+    text-align: justify;
+}
+#start:hover{
+    color:brown;
+}

@@ -10,11 +10,17 @@ import { GameOverDialogComponent } from './game-over-dialog/game-over-dialog.com
 import { RouterModule } from '@angular/router';
 // import { MatDialogRef } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+import { CreditsComponent } from './credits/credits.component';
+import { AvatarOptionsMenuComponent } from './avatar-options-menu/avatar-options-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
-    GameOverDialogComponent
+    GameOverDialogComponent,
+    MainMenuComponent,
+    CreditsComponent,
+    AvatarOptionsMenuComponent
   ],
   imports: [
     BrowserModule,

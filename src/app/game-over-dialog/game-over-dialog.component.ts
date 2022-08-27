@@ -16,8 +16,8 @@ export class GameOverDialogComponent implements OnInit {
   reset():void{
     
     this.refDialog.close();
-    this.refDialog.afterClosed().subscribe((result) => {
-    });
+    this.route.navigateByUrl('');
+    
     
   }
 

@@ -1,0 +1,20 @@
+.cols{
+    background: #c8c0d5;
+}
+.center{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+#start:hover{
+    color:brown;
+}
+#options:hover{
+    color:brown;
+}
+#credits:hover{
+    color:brown;
+}

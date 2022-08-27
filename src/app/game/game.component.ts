@@ -5,6 +5,7 @@ import { Minimax } from '../minimax';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AvatarService } from '../avatar.service';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -21,8 +22,9 @@ export class GameComponent implements OnInit {
 	private ai : Minimax;
 	private winner : number; // 0: There is no winner yet, 1: AI Wins, 2: Human Wins
 	// public iterationMatrix=this.board.getBoardMatrix();
-
-	constructor(private dialog: MatDialog,private route: Router) { 
+	playerAvatar: string="../../assets/images/"+this.avService.player;
+	aiAvatar: string="../../assets/images/"+this.avService.ai;
+	constructor(private dialog: MatDialog,private route: Router,private avService: AvatarService) { 
 	
 		this.isPlayersTurn = true;
 		this.gameFinished = false;
@@ -65,9 +67,11 @@ export class GameComponent implements OnInit {
 	playerMakesMove(x: number, y: number):void{
 		if(this.board.addStone(x,y,true)){
 			this.winner=this.checkWinner();
-			this.aiMakesMove();
-			this.winner=this.checkWinner();
-			this.checkGameStatus();
+			if(this.winner!=0)this.checkGameStatus();
+			if(this.winner==0)this.aiMakesMove();
+			// if(this.winner==0)setTimeout(this.aiMakesMove, 1);
+			if(this.winner==0)this.winner=this.checkWinner();
+			if(this.winner!=0)this.checkGameStatus();
 		}
 		
 		
@@ -77,20 +81,21 @@ export class GameComponent implements OnInit {
 	aiMakesMove():void{
 		let ret = this.ai.calculateNextMove(this.minimaxDepth);
 		this.board.addStone(ret[1],ret[0],false);
-		this.gameFinished=this.ai.getGameStatus();
-		this.checkGameStatus();
+		// this.checkGameStatus();
 	}
 	checkGameStatus():void{
 		if(this.gameFinished==true){
-			this.dialog.open(GameOverDialogComponent);
-			this.board=new Board(10);
 			this.gameFinished=false;
-			this.ai=new Minimax(this.board);
+			this.dialog.open(GameOverDialogComponent);
+			// this.board=new Board(10);
+			// this.gameFinished=false;
+			// this.ai=new Minimax(this.board);
 			
 		}
 	}
 	ngOnInit(): void {
-		
+		this.playerAvatar="../../assets/images/"+this.avService.player;
+		this.aiAvatar="../../assets/images/"+this.avService.ai;
 	}
 
 }

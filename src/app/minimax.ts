@@ -323,7 +323,6 @@ export class Minimax{
 			move[0] = (bestMove[1]);
 			move[1] = (bestMove[2]);
 			console.log("ekhane paisi")
-			this.gameOver=true;
 			
 		} else {
 			// console.log("before minimax");

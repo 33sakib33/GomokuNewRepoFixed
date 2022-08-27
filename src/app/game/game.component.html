@@ -1,11 +1,12 @@
-<div class="centerFlex">
+<div class="box">
+<div class="centerFlex boxContent">
     <div class="container post position-static center">
         <div class="row borderGang " *ngFor="let i of board.getBoardMatrix(); let ix = index">
           <div class="col-sm border border-secondary fixeds" *ngFor="let j of i; let iy = index" (click)="playerMakesMove(iy,ix)">
              <!-- this the tag that shows the pieces on the board. -->
             <!-- <div *ngIf="board.getBoardValue(ix,iy)==1"class="dotred"></div> -->
-            <img src="../../assets/images/hello.jpg" *ngIf="board.getBoardValue(ix,iy)==1" class="fixeds">
-            <img src="../../assets/images/hello2.png" *ngIf="board.getBoardValue(ix,iy)==2" class="fixeds">
+            <img [src]="playerAvatar" *ngIf="board.getBoardValue(ix,iy)==1" class="fixeds">
+            <img [src]="aiAvatar" *ngIf="board.getBoardValue(ix,iy)==2" class="fixeds">
             <!-- <div *ngIf="board.getBoardValue(ix,iy)==2"class="dotblue"></div> -->
             
             </div>
@@ -14,4 +15,10 @@
         </div>
       </div>
     </div>
+    <div class="display-6 addPadding">
+      <main>
+        <span><p>GOMOKU</p></span>
+      </main>
+    </div>
+  </div>
     <!-- <img src="../../assets/images/hello.jpg" class="img-fluid" alt="Responsive image"> -->
