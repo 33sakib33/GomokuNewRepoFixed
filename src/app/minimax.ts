@@ -226,7 +226,7 @@ export class Minimax{
 				}
 				else {
 					if(currentTurn) return Math.floor(Math.random() * (12 - 8 + 1)) + 8;
-					else return Math.floor(Math.random() * (7 - 6 + 1)) + 6;
+					else return Math.floor(Math.random() * (6 - 4 + 1)) + 4;
 				}
 			}
 			case 2: {
@@ -261,12 +261,15 @@ export class Minimax{
 			bestMove = this.minimaxSearchAB(depth, this.board, true, -1.0, this.getWinScore());
 			if(bestMove == null) {
 				move = null;
+				return this.board.generateMoves()[0];
 			} else {
 				move[0] = (bestMove[1]);
 				move[1] = (bestMove[2]);
 			}
 		}
-		
+		move[0]=Number(move[0]);
+		move[1]=Number(move[1]);
+		console.log(move);
 		this.evaluationCount=0;
 		
 		return move;
@@ -318,6 +321,7 @@ export class Minimax{
 				}
 			}
 		}
+
 		else {
 
 			bestMove[0] = 100000000.0;

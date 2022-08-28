@@ -3,7 +3,7 @@ import { Board } from '../board';
 import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
 import { Minimax } from '../minimax';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AvatarService } from '../avatar.service';
 @Component({
@@ -19,7 +19,7 @@ export class GameComponent implements OnInit {
 	private gameFinished : boolean;
 	private minimaxDepth : number;
 	private aiStarts : boolean; // AI makes the first move
-	private ai : Minimax;
+	private ai : Minimax=new Minimax(this.board);
 	private winner : number; // 0: There is no winner yet, 1: AI Wins, 2: Human Wins
 	// public iterationMatrix=this.board.getBoardMatrix();
 	playerAvatar: string="../../assets/images/"+this.avService.player;
@@ -30,7 +30,7 @@ export class GameComponent implements OnInit {
 		this.gameFinished = false;
 		this.minimaxDepth = 4;
 		this.aiStarts = false;
-		this.ai = new Minimax(this.board);
+		// this.ai = new Minimax(this.board);
 		this.winner = 0;
 		// this.board.permMove(3,4,true);
 		// this.aiMakesMove();
@@ -68,8 +68,8 @@ export class GameComponent implements OnInit {
 		if(this.board.permMove(x,y,true)){
 			this.winner=this.checkWinner();
 			if(this.winner!=0)this.checkGameStatus();
-			if(this.winner==0)this.aiMakesMove();
-			// if(this.winner==0)setTimeout(this.aiMakesMove, 1);
+			if(this.winner==0) this.aiMakesMove();
+			// if(this.winner==0)setTimeout(this.aiMakesMove, 100);
 			if(this.winner==0)this.winner=this.checkWinner();
 			if(this.winner!=0)this.checkGameStatus();
 		}
@@ -86,6 +86,7 @@ export class GameComponent implements OnInit {
 	checkGameStatus():void{
 		if(this.gameFinished==true){
 			this.gameFinished=false;
+			this.avService.winner=this.winner;
 			this.dialog.open(GameOverDialogComponent);
 			// this.board=new Board(10);
 			// this.gameFinished=false;

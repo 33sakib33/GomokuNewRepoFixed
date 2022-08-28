@@ -18,4 +18,7 @@ export class AvatarOptionsMenuComponent implements OnInit {
   setManchesterDerby():void{
     this.avService.set2();
   }
+  setGS():void{
+    this.avService.set3();
+  }
 }

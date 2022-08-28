@@ -1,4 +1,6 @@
 <div class="display-4">
+<p *ngIf="winner==1">AI wins</p>
+<p *ngIf="winner==2">Human wins</p>
 <p>Game Over. Go home!</p>
 <button class= "center btn btn-dark" (click)="reset()">Main Menu</button>
 </div>
