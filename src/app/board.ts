@@ -34,11 +34,11 @@ export class Board{
 		return this.boardMatrix;
 	}
 
-    public addStoneNoGUI(posX : number, posY : number, black : boolean) {
+    public temporaryMove(posX : number, posY : number, black : boolean) {
 		this.boardMatrix[posY][posX] = black ? 2 : 1;
 	}
 
-    public addStone(posX : number, posY : number, black : boolean): boolean{
+    public permMove(posX : number, posY : number, black : boolean): boolean{
 		
 		// Check whether the cell is empty or not
 		if(this.boardMatrix[posY][posX] != 0) return false;

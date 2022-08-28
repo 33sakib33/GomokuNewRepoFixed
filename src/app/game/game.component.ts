@@ -32,7 +32,7 @@ export class GameComponent implements OnInit {
 		this.aiStarts = false;
 		this.ai = new Minimax(this.board);
 		this.winner = 0;
-		// this.board.addStone(3,4,true);
+		// this.board.permMove(3,4,true);
 		// this.aiMakesMove();
 		
 		
@@ -62,10 +62,10 @@ export class GameComponent implements OnInit {
 		return 0;
 	}
 	// private playMove(posX : number, posY : number, black : boolean) : boolean{
-	// 	return this.board.addStone(posX, posY, black);
+	// 	return this.board.permMove(posX, posY, black);
 	// }
 	playerMakesMove(x: number, y: number):void{
-		if(this.board.addStone(x,y,true)){
+		if(this.board.permMove(x,y,true)){
 			this.winner=this.checkWinner();
 			if(this.winner!=0)this.checkGameStatus();
 			if(this.winner==0)this.aiMakesMove();
@@ -80,7 +80,7 @@ export class GameComponent implements OnInit {
 	}
 	aiMakesMove():void{
 		let ret = this.ai.calculateNextMove(this.minimaxDepth);
-		this.board.addStone(ret[1],ret[0],false);
+		this.board.permMove(ret[1],ret[0],false);
 		// this.checkGameStatus();
 	}
 	checkGameStatus():void{
