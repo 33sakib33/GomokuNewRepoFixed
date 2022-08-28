@@ -249,7 +249,8 @@ export class Minimax{
     public calculateNextMove(depth : number) : number[]{
 		
 		var move : any=Array(2);
-		var bestMove = this.searchWinningMove(this.board);
+		// var bestMove = this.searchWinningMove(this.board);
+		var bestMove=null;
 		// console.log("hello");
 		if(bestMove != null ) {
 			move[0] = (bestMove[1]);
